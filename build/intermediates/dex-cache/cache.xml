@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-25.0.1_034e561f50c3fdf66a27d8391a9e6e447b5851c7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="00d4c8eebf2b681073c72a26bd0849549e51c7cb">
+        <dex dex="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-25.0.1_e80ca98d249cea059b813eebfa60c046095682f3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="bc7e99e8d0fc279a05aa91378530f467ad62d443">
+        <dex dex="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-25.0.1_0f2293ef5c3ff4727a1e5180d982f7790b7b4f9a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="772bed2d992b67b9d0327f766cc95cd63031dcd3">
+        <dex dex="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-25.0.1_defbe9a0b4c4eaec09e9e62f09b5bed093fa9776.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.1_f5a38fa52e284a09d0ff1a2ac6f8f5fab5b7fd4e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
+        <dex dex="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-25.0.1_627fb6080734a641844d790a2f9425b724e5ba98.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="26c6eef571592c91f29e56fda0bac73321de0c92">
+        <dex dex="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-25.0.1_22386424797b304d44a6969df701a18f3946e226.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c0bd6ffb002a85b5e7cad29f8558d1cc59539679">
+        <dex dex="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.1_b25ca83f0683315fe2de6cbb423f27c24701147a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/exploded-aar/360DownLoading/library/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="38dc7071f81c0fb4053f6a7991862a9b2227c664">
+        <dex dex="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/pre-dexed/debug/360DownLoading-library-unspecified_b71b8cffb44fd8627e783b264f5d8603c358aec6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f7ac4b327fdb9e2ee386f5adc46164927658de4b">
+        <dex dex="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-25.0.1_53fe90287086f06464581632663a31f33d514717.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b24e1c688744078e1fa833ffadf696794761bbe5">
+        <dex dex="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-25.0.1_af34f6b8e8906cfa2af97f1a4d0e81f46a04e2a9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6a1479afe9f1b3645e1cd9a87318976893472818">
+        <dex dex="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-25.0.1_d5518a211c5bb3076241b670f5645835340b804c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiangcheng/android_sdk/sdk/extras/android/m2repository/com/android/support/support-annotations/25.0.1/support-annotations-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a09194311f8f89c3e6db09d79f50897a889d615e">
+        <dex dex="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/pre-dexed/debug/support-annotations-25.0.1_36d016059af983f3b56a7852508e141a1bce4fe5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
+        <dex dex="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.1_732d808aab9b51684a4472f785e7a344b0e3f421.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f83b00041ecfba705603fec40363416c7de69719">
+        <dex dex="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.1_e06a301eebb0ff0b8804cc02fcc43d307d2381c5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c5b7145fb34779b6639147b8f2f8dd77c0db771b">
+        <dex dex="/Users/xiangcheng/Downloads/360DownLoading/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.1_6bdb4f39fbab2b8f95b50f363c51db15fb3275e9.jar" />
+    </item>
+
+</items>

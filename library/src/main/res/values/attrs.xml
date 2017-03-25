@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Down360Loading">
+        <attr name="status_text_size" format="dimension" />
+        <attr name="status_text_color" format="color" />
+        <attr name="bg_color" format="color" />
+        <attr name="progress_color" format="color" />
+        <attr name="collect_speed" format="integer" />
+        <attr name="collect_rotate_speed" format="integer" />
+        <attr name="expand_speed" format="integer" />
+        <attr name="right_loading_speed" format="integer" />
+        <attr name="left_loading_speed" format="integer" />
+
+    </declare-styleable>
+</resources>
