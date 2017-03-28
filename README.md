@@ -91,6 +91,7 @@ public void setStatus(Status status) {
 **好了介绍就到这里了，如果觉得行的话，
 进入github的传送门点个star吧，谢谢!!!**
 
-###关于我:
-**email:**a1002326270@163.com
-**github:**[enter](https://github.com/1002326270xc/360Downloading-master)
+
+### 关于我:
+**email:** a1002326270@163.com
+**csdn:**[enter](http://blog.csdn.net/u010429219/article/details/64922781)
