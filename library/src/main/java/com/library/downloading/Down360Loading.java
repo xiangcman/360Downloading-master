@@ -307,11 +307,10 @@ public class Down360Loading extends View {
                 canvas.save();
                 //// TODO: 17/2/22
                 canvas.rotate(loadAngle, (float) (width - height * 1.0 / 2), (float) (height * 1.0 / 2));
-                //其实这里瞄点是比较麻烦的，应该是按照一个圆的轨迹去画的，但是我这里为了省事就没那么复杂瞄点了
-                canvas.drawCircle(width - height + 15, (float) (height * 1.0 / 2), 5, textPaint);
-                canvas.drawCircle(width - height + 22, (float) (height * 1.0 / 2 - 20), 7, textPaint);
-                canvas.drawCircle(width - height + 35, (float) (height * 1.0 / 2 - 35), 9, textPaint);
-                canvas.drawCircle(width - height + 55, (float) (height * 1.0 / 2 - 48), 11, textPaint);
+                canvas.drawCircle(width - height + 25, getCircleY(width - height + 25), 5, textPaint);
+                canvas.drawCircle(width - height + 40, getCircleY(width - height + 40), 7, textPaint);
+                canvas.drawCircle(width - height + 60, getCircleY(width - height + 60), 9, textPaint);
+                canvas.drawCircle(width - height + 90, getCircleY(width - height + 90), 11, textPaint);
                 canvas.restore();
             }
             //中间的进度文字
@@ -319,6 +318,17 @@ public class Down360Loading extends View {
             float allHeight = fontMetrics.descent - fontMetrics.ascent;
             canvas.drawText(progress + "%", (float) (width * 1.0 / 2), (float) (height * 1.0 / 2 - allHeight / 2 - fontMetrics.ascent), textPaint);
         }
+    }
+
+    /**
+     * 根据x坐标算出圆的y坐标
+     *
+     * @param cx:点的圆心
+     * @return
+     */
+    private float getCircleY(float cx) {
+        float cy = (float) (height * 1.0 / 2 - Math.sqrt((height * 1.0 / 2 - dp2px(7)) * (height * 1.0 / 2 - dp2px(7)) - ((width - height * 1.0 / 2) - cx) * ((width - height * 1.0 / 2) - cx)));
+        return cy;
     }
 
     /**
@@ -495,7 +505,8 @@ public class Down360Loading extends View {
     }
 
     /**
-     *设置状态的方法
+     * 设置状态的方法
+     *
      * @param status(Down360Loading.Status.Normal:直接取消的操作)
      */
     public void setStatus(Status status) {
