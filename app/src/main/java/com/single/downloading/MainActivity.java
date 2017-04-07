@@ -18,8 +18,6 @@ public class MainActivity extends AppCompatActivity implements Down360Loading.On
     private Timer timer;
     private int progress;
 
-//    private boolean stop;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
