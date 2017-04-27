@@ -440,6 +440,8 @@ public class Down360Loading extends View {
         super.onMeasure(MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.EXACTLY));
     }
 
+    private float moveX;
+
     /**
      * 暂停或继续的方法
      *
@@ -452,10 +454,14 @@ public class Down360Loading extends View {
         this.stop = stop;
         if (stop) {
             loadRotateAnimation.cancel();
+            moveX = (float) movePointAnimation.getAnimatedFraction();
             movePointAnimation.cancel();
+
         } else {
             loadRotateAnimation.start();
+            movePointAnimation.setCurrentFraction(moveX);
             movePointAnimation.start();
+
         }
     }
 
