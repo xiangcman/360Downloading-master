@@ -12,7 +12,9 @@ import com.library.downloading.Down360Loading;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity implements Down360Loading.OnProgressUpdateListener {
+import static com.single.downloading.R.id.stop;
+
+public class MainActivity extends AppCompatActivity implements Down360Loading.OnProgressStateChangeListener {
     private static final String TAG = MainActivity.class.getSimpleName();
     //模拟进度的计时器
     private Timer timer;
@@ -42,39 +44,44 @@ public class MainActivity extends AppCompatActivity implements Down360Loading.On
                 });
             }
         }, 0, 500);
-        loading.setOnProgressUpdateListener(this);
+        loading.setOnProgressStateChangeListener(this);
 
         findViewById(R.id.cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (loading.getStatus() == Down360Loading.Status.Load) {
-                    progress = 0;
-                    loading.setStatus(Down360Loading.Status.Normal);
-                    ((Button) findViewById(R.id.stop)).setText("暂停");
-                }
+                loading.setCancel();
             }
         });
 
-        findViewById(R.id.stop).setOnClickListener(new View.OnClickListener() {
+        findViewById(stop).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (loading.getStatus() == Down360Loading.Status.Load) {
-                    boolean stop = loading.isStop();
-                    loading.setStop(!stop);
-                    ((Button) findViewById(R.id.stop)).setText(stop ? "继续" : "暂停");
-                }
+                boolean stop = loading.isStop();
+                loading.setStop(!stop);
             }
         });
 
     }
 
     @Override
-    public void onChange(int progress) {
-        if (progress >= 100) {
-            //do something
-            progress = 100;
-            timer.cancel();
-            Toast.makeText(this, "下载完成", Toast.LENGTH_SHORT).show();
-        }
+    public void onSuccess() {
+        timer.cancel();
+        Toast.makeText(this, "下载完成", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCancel() {
+        progress = 0;
+        ((Button) findViewById(stop)).setText("暂停");
+    }
+
+    @Override
+    public void onContinue() {
+        ((Button) findViewById(stop)).setText("暂停");
+    }
+
+    @Override
+    public void onStop() {
+        ((Button) findViewById(stop)).setText("继续");
     }
 }

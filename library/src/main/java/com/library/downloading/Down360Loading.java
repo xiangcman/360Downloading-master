@@ -412,10 +412,9 @@ public class Down360Loading extends View {
 
             @Override
             public void onAnimationRepeat(Animator animation) {
-                fourMovePoint[3].isDraw = true;
-                fourMovePoint[2].isDraw = true;
-                fourMovePoint[1].isDraw = true;
-                fourMovePoint[0].isDraw = true;
+                for (int i = 0; i < fourMovePoint.length; i++) {
+                    fourMovePoint[i].isDraw = true;
+                }
             }
         });
 
@@ -430,6 +429,9 @@ public class Down360Loading extends View {
      * @param stop(true:表示暂停，false:继续)
      */
     public void setStop(boolean stop) {
+        if (status != Down360Loading.Status.Load) {
+            return;
+        }
         if (this.stop == stop) {
             return;
         }
@@ -438,11 +440,16 @@ public class Down360Loading extends View {
             loadRotateAnimation.cancel();
             moveX = movePointAnimation.getAnimatedFraction();
             movePointAnimation.cancel();
-
+            if (onProgressStateChangeListener != null) {
+                onProgressStateChangeListener.onStop();
+            }
         } else {
             loadRotateAnimation.start();
             movePointAnimation.setCurrentFraction(moveX);
             movePointAnimation.start();
+            if (onProgressStateChangeListener != null) {
+                onProgressStateChangeListener.onContinue();
+            }
         }
     }
 
@@ -454,14 +461,30 @@ public class Down360Loading extends View {
         return status;
     }
 
-    public void setOnProgressUpdateListener(OnProgressUpdateListener onProgressUpdateListener) {
-        this.onProgressUpdateListener = onProgressUpdateListener;
+    public void setOnProgressStateChangeListener(OnProgressStateChangeListener onProgressStateChangeListener) {
+        this.onProgressStateChangeListener = onProgressStateChangeListener;
     }
 
-    private OnProgressUpdateListener onProgressUpdateListener;
+    private OnProgressStateChangeListener onProgressStateChangeListener;
 
-    public interface OnProgressUpdateListener {
-        void onChange(int progress);
+    public interface OnProgressStateChangeListener {
+        void onSuccess();
+
+        //暂停
+        void onStop();
+
+        //取消
+        void onCancel();
+
+        //继续
+        void onContinue();
+    }
+
+    //设置取消的方法
+    public void setCancel() {
+        if (status == Down360Loading.Status.Load) {
+            setStatus(Down360Loading.Status.Normal);
+        }
     }
 
     /**
@@ -478,9 +501,6 @@ public class Down360Loading extends View {
             return;
         }
         this.progress = progress;
-        if (onProgressUpdateListener != null) {
-            onProgressUpdateListener.onChange(this.progress);
-        }
         invalidate();
         if (progress == 100) {
             status = Status.Complete;
@@ -488,6 +508,9 @@ public class Down360Loading extends View {
             clearAnimation();
             loadRotateAnimation.cancel();
             movePointAnimation.cancel();
+            if (onProgressStateChangeListener != null) {
+                onProgressStateChangeListener.onSuccess();
+            }
         }
     }
 
@@ -507,6 +530,9 @@ public class Down360Loading extends View {
             clearAnimation();
             loadRotateAnimation.cancel();
             movePointAnimation.cancel();
+            if (onProgressStateChangeListener != null) {
+                onProgressStateChangeListener.onCancel();
+            }
         }
         invalidate();
     }

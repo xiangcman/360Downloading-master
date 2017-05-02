@@ -36,8 +36,8 @@ public void setProgress(int progress) {
         return;
     }
     this.progress = progress;
-    if (onProgressUpdateListener != null) {
-        onProgressUpdateListener.onChange(this.progress);
+    if (onProgressStateChangeListener != null) {
+        onProgressStateChangeListener.onChange(this.progress);
     }
     invalidate();
     if (progress == 100) {
