@@ -282,14 +282,10 @@ public class Down360Loading extends View {
             canvas.drawRoundRect(start, 0, (float) (width * 1.0 / 2 + currentLength * 1.0 / 2), height, 90, 90, bgPaint);
             if (progress != 100) {
                 //画中间的几个loading的点的情况哈
-                if (fourMovePoint[0].isDraw)
-                    canvas.drawCircle(fourMovePoint[0].moveX, fourMovePoint[0].moveY, fourMovePoint[0].radius, textPaint);
-                if (fourMovePoint[1].isDraw)
-                    canvas.drawCircle(fourMovePoint[1].moveX, fourMovePoint[1].moveY, fourMovePoint[1].radius, textPaint);
-                if (fourMovePoint[2].isDraw)
-                    canvas.drawCircle(fourMovePoint[2].moveX, fourMovePoint[2].moveY, fourMovePoint[2].radius, textPaint);
-                if (fourMovePoint[3].isDraw)
-                    canvas.drawCircle(fourMovePoint[3].moveX, fourMovePoint[3].moveY, fourMovePoint[3].radius, textPaint);
+                for (int i = 0; i < fourMovePoint.length; i++) {
+                    if (fourMovePoint[i].isDraw)
+                        canvas.drawCircle(fourMovePoint[i].moveX, fourMovePoint[i].moveY, fourMovePoint[i].radius, textPaint);
+                }
             }
 
             float progressRight = (float) (progress * width * 1.0 / 100);
@@ -385,26 +381,13 @@ public class Down360Loading extends View {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float value = animation.getAnimatedFraction();
-                fourMovePoint[0].moveX = fourMovePoint[0].startX - fourMovePoint[0].startX * value;
-                if (fourMovePoint[0].moveX <= height / 2) {
-                    fourMovePoint[0].isDraw = false;
+                for (int i = 0; i < fourMovePoint.length; i++) {
+                    fourMovePoint[i].moveX = fourMovePoint[i].startX - fourMovePoint[0].startX * value;
+                    if (fourMovePoint[i].moveX <= height / 2) {
+                        fourMovePoint[i].isDraw = false;
+                    }
+                    fourMovePoint[i].moveY = drawMovePoints(fourMovePoint[i].moveX);
                 }
-                fourMovePoint[1].moveX = fourMovePoint[1].startX - fourMovePoint[0].startX * value;
-                if (fourMovePoint[1].moveX <= height / 2) {
-                    fourMovePoint[1].isDraw = false;
-                }
-                fourMovePoint[2].moveX = fourMovePoint[2].startX - fourMovePoint[0].startX * value;
-                if (fourMovePoint[2].moveX <= height / 2) {
-                    fourMovePoint[2].isDraw = false;
-                }
-                fourMovePoint[3].moveX = fourMovePoint[3].startX - fourMovePoint[0].startX * value;
-                if (fourMovePoint[3].moveX <= height / 2) {
-                    fourMovePoint[3].isDraw = false;
-                }
-                fourMovePoint[0].moveY = drawMovePoints(fourMovePoint[0].moveX);
-                fourMovePoint[1].moveY = drawMovePoints(fourMovePoint[1].moveX);
-                fourMovePoint[2].moveY = drawMovePoints(fourMovePoint[2].moveX);
-                fourMovePoint[3].moveY = drawMovePoints(fourMovePoint[3].moveX);
                 Log.d("TAG", "fourMovePoint[0].moveX:" + fourMovePoint[0].moveX + ",fourMovePoint[0].moveY:" + fourMovePoint[0].moveY);
             }
         });
@@ -412,10 +395,9 @@ public class Down360Loading extends View {
         movePointAnimation.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                fourMovePoint[3].isDraw = true;
-                fourMovePoint[2].isDraw = true;
-                fourMovePoint[1].isDraw = true;
-                fourMovePoint[0].isDraw = true;
+                for (int i = 0; i < fourMovePoint.length; i++) {
+                    fourMovePoint[i].isDraw = true;
+                }
             }
 
             @Override
@@ -454,14 +436,13 @@ public class Down360Loading extends View {
         this.stop = stop;
         if (stop) {
             loadRotateAnimation.cancel();
-            moveX = (float) movePointAnimation.getAnimatedFraction();
+            moveX = movePointAnimation.getAnimatedFraction();
             movePointAnimation.cancel();
 
         } else {
             loadRotateAnimation.start();
             movePointAnimation.setCurrentFraction(moveX);
             movePointAnimation.start();
-
         }
     }
 
