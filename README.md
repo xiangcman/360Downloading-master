@@ -23,8 +23,16 @@
 
 **代码使用:**
 ```java
- /**
+//设置取消的方法
+public void setCancel() {
+    if (status == Down360Loading.Status.Load) {
+        setStatus(Down360Loading.Status.Normal);
+    }
+}
+
+/**
  * 进度改变的方法
+ *
  * @param progress
  */
 public void setProgress(int progress) {
@@ -36,9 +44,6 @@ public void setProgress(int progress) {
         return;
     }
     this.progress = progress;
-    if (onProgressStateChangeListener != null) {
-        onProgressStateChangeListener.onChange(this.progress);
-    }
     invalidate();
     if (progress == 100) {
         status = Status.Complete;
@@ -46,30 +51,15 @@ public void setProgress(int progress) {
         clearAnimation();
         loadRotateAnimation.cancel();
         movePointAnimation.cancel();
+        if (onProgressStateChangeListener != null) {
+            onProgressStateChangeListener.onSuccess();
+        }
     }
 }
 
 /**
- * 暂停或继续的方法
+ * 设置状态的方法
  *
- * @param stop(true:表示暂停，false:继续)
- */
-public void setStop(boolean stop) {
-    if (this.stop == stop) {
-        return;
-    }
-    this.stop = stop;
-    if (stop) {
-        loadRotateAnimation.cancel();
-        movePointAnimation.cancel();
-    } else {
-        loadRotateAnimation.start();
-        movePointAnimation.start();
-    }
-}
-
-/**
- *设置状态的方法
  * @param status(Down360Loading.Status.Normal:直接取消的操作)
  */
 public void setStatus(Status status) {
@@ -83,8 +73,41 @@ public void setStatus(Status status) {
         clearAnimation();
         loadRotateAnimation.cancel();
         movePointAnimation.cancel();
+        if (onProgressStateChangeListener != null) {
+            onProgressStateChangeListener.onCancel();
+        }
     }
     invalidate();
+}
+
+/**
+ * 暂停或继续的方法
+ *
+ * @param stop(true:表示暂停，false:继续)
+ */
+public void setStop(boolean stop) {
+    if (status != Down360Loading.Status.Load) {
+        return;
+    }
+    if (this.stop == stop) {
+        return;
+    }
+    this.stop = stop;
+    if (stop) {
+        loadRotateAnimation.cancel();
+        moveX = movePointAnimation.getAnimatedFraction();
+        movePointAnimation.cancel();
+        if (onProgressStateChangeListener != null) {
+            onProgressStateChangeListener.onStop();
+        }
+    } else {
+        loadRotateAnimation.start();
+        movePointAnimation.setCurrentFraction(moveX);
+        movePointAnimation.start();
+        if (onProgressStateChangeListener != null) {
+            onProgressStateChangeListener.onContinue();
+        }
+    }
 }
 ```
 
