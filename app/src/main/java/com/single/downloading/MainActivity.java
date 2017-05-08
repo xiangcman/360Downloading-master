@@ -84,4 +84,9 @@ public class MainActivity extends AppCompatActivity implements Down360Loading.On
     public void onStop() {
         ((Button) findViewById(stop)).setText("继续");
     }
+    
+      @Override
+    protected void onDestroy() {
+        timer.cancel();
+    }
 }
