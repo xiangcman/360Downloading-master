@@ -53,6 +53,22 @@ public interface OnProgressStateChangeListener {
 
 ```
 
+### gradle依赖:
+```java
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+dependencies {
+        ...
+        compile 'com.github.1002326270xc:360Downloading-master:v1.0'
+        ...
+}
+```
+
 **好了介绍就到这里了，如果觉得行的话，点个star吧，谢谢!!!**
 
 
