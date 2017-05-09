@@ -87,6 +87,9 @@ public class MainActivity extends AppCompatActivity implements Down360LoadingVie
 
     @Override
     protected void onDestroy() {
-        timer.cancel();
+        super.onDestroy();
+        if (timer != null) {
+            timer.cancel();
+        }
     }
 }
