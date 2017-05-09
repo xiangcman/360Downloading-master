@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:orientation="horizontal"
+    android:background="#ffffff"
+    android:gravity="center_vertical">
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/cancel_img"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+    <com.library.downloading.Down360LoadingView
+        android:id="@+id/down_load"
+        android:layout_width="280dp"
+        android:layout_height="45dp"
+        android:layout_centerInParent="true" />
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/stop_img"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+</LinearLayout>

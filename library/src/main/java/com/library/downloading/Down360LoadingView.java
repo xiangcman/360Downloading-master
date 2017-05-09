@@ -23,9 +23,9 @@ import android.view.animation.Transformation;
  * Created by xiangcheng on 17/2/22.
  */
 
-public class Down360Loading extends View {
+public class Down360LoadingView extends View {
 
-    private static final String TAG = Down360Loading.class.getSimpleName();
+    private static final String TAG = Down360LoadingView.class.getSimpleName();
 
     private boolean stop;
     private Status status = Status.Normal;
@@ -76,38 +76,38 @@ public class Down360Loading extends View {
     //左边运动的几个点走一次需要的时间
     private int leftLoadingSpeed;
 
-    public Down360Loading(Context context) {
+    public Down360LoadingView(Context context) {
         super(context);
         init();
     }
 
-    public Down360Loading(Context context, AttributeSet attrs) {
+    public Down360LoadingView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initArgus(context, attrs);
         init();
     }
 
     private void initArgus(Context context, AttributeSet attrs) {
-        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.Down360Loading);
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.Down360LoadingView);
         try {
             statusSize = sp2px(15);
-            statusSize = (int) array.getDimension(R.styleable.Down360Loading_status_text_size, statusSize);
+            statusSize = (int) array.getDimension(R.styleable.Down360LoadingView_status_text_size, statusSize);
             statusColor = Color.WHITE;
-            statusColor = array.getColor(R.styleable.Down360Loading_status_text_color, statusColor);
+            statusColor = array.getColor(R.styleable.Down360LoadingView_status_text_color, statusColor);
             bgColor = Color.parseColor("#00CC99");
-            bgColor = array.getColor(R.styleable.Down360Loading_bg_color, bgColor);
+            bgColor = array.getColor(R.styleable.Down360LoadingView_bg_color, bgColor);
             progressColor = Color.parseColor("#4400CC99");
-            progressColor = array.getColor(R.styleable.Down360Loading_progress_color, progressColor);
+            progressColor = array.getColor(R.styleable.Down360LoadingView_progress_color, progressColor);
             collectSpeed = 800;
-            collectSpeed = array.getInt(R.styleable.Down360Loading_collect_speed, collectSpeed);
+            collectSpeed = array.getInt(R.styleable.Down360LoadingView_collect_speed, collectSpeed);
             collectRotateSpeed = 1500;
-            collectRotateSpeed = array.getInt(R.styleable.Down360Loading_collect_rotate_speed, collectRotateSpeed);
+            collectRotateSpeed = array.getInt(R.styleable.Down360LoadingView_collect_rotate_speed, collectRotateSpeed);
             expandSpeed = 1000;
-            expandSpeed = array.getInt(R.styleable.Down360Loading_expand_speed, expandSpeed);
-            rightLoadingSpeed = 5;
-            rightLoadingSpeed = array.getInt(R.styleable.Down360Loading_right_loading_speed, rightLoadingSpeed);
-            leftLoadingSpeed = 3000;
-            leftLoadingSpeed = array.getInt(R.styleable.Down360Loading_left_loading_speed, leftLoadingSpeed);
+            expandSpeed = array.getInt(R.styleable.Down360LoadingView_expand_speed, expandSpeed);
+            rightLoadingSpeed = 7;
+            rightLoadingSpeed = array.getInt(R.styleable.Down360LoadingView_right_loading_speed, rightLoadingSpeed);
+            leftLoadingSpeed = 2000;
+            leftLoadingSpeed = array.getInt(R.styleable.Down360LoadingView_left_loading_speed, leftLoadingSpeed);
         } finally {
             array.recycle();
         }
@@ -303,10 +303,10 @@ public class Down360Loading extends View {
                 canvas.save();
                 //// TODO: 17/2/22
                 canvas.rotate(loadAngle, (float) (width - height * 1.0 / 2), (float) (height * 1.0 / 2));
-                canvas.drawCircle(width - height + 25, getCircleY(width - height + 25), 5, textPaint);
-                canvas.drawCircle(width - height + 40, getCircleY(width - height + 40), 7, textPaint);
-                canvas.drawCircle(width - height + 60, getCircleY(width - height + 60), 9, textPaint);
-                canvas.drawCircle(width - height + 90, getCircleY(width - height + 90), 11, textPaint);
+                canvas.drawCircle(width - height + 30, getCircleY(width - height + 30), 5, textPaint);
+                canvas.drawCircle(width - height + 45, getCircleY(width - height + 45), 8, textPaint);
+                canvas.drawCircle(width - height + 68, getCircleY(width - height + 68), 11, textPaint);
+                canvas.drawCircle(width - height + 98, getCircleY(width - height + 98), 14, textPaint);
                 canvas.restore();
             }
             //中间的进度文字
@@ -369,9 +369,9 @@ public class Down360Loading extends View {
         height = heightSize;
 
         fourMovePoint[0] = new MovePoint(dp2px(4), (float) ((width - height / 2) * 0.88), 0);
-        fourMovePoint[1] = new MovePoint(dp2px(3), (float) ((width - height / 2) * 0.85), 0);
-        fourMovePoint[2] = new MovePoint(dp2px(2), (float) ((width - height / 2) * 0.80), 0);
-        fourMovePoint[3] = new MovePoint(dp2px(5), (float) ((width - height / 2) * 0.75), 0);
+        fourMovePoint[1] = new MovePoint(dp2px(3), (float) ((width - height / 2) * 0.83), 0);
+        fourMovePoint[2] = new MovePoint(dp2px(2), (float) ((width - height / 2) * 0.78), 0);
+        fourMovePoint[3] = new MovePoint(dp2px(5), (float) ((width - height / 2) * 0.70), 0);
 
         movePointAnimation = ValueAnimator.ofFloat(0, 1);
         movePointAnimation.setRepeatCount(ValueAnimator.INFINITE);
@@ -429,7 +429,7 @@ public class Down360Loading extends View {
      * @param stop(true:表示暂停，false:继续)
      */
     public void setStop(boolean stop) {
-        if (status != Down360Loading.Status.Load) {
+        if (status != Down360LoadingView.Status.Load) {
             return;
         }
         if (this.stop == stop) {
@@ -441,7 +441,7 @@ public class Down360Loading extends View {
             moveX = movePointAnimation.getAnimatedFraction();
             movePointAnimation.cancel();
             if (onProgressStateChangeListener != null) {
-                onProgressStateChangeListener.onStop();
+                onProgressStateChangeListener.onStopDown();
             }
         } else {
             loadRotateAnimation.start();
@@ -471,7 +471,7 @@ public class Down360Loading extends View {
         void onSuccess();
 
         //暂停
-        void onStop();
+        void onStopDown();
 
         //取消
         void onCancel();
@@ -482,8 +482,8 @@ public class Down360Loading extends View {
 
     //设置取消的方法
     public void setCancel() {
-        if (status == Down360Loading.Status.Load) {
-            setStatus(Down360Loading.Status.Normal);
+        if (status == Down360LoadingView.Status.Load) {
+            setStatus(Down360LoadingView.Status.Normal);
         }
     }
 

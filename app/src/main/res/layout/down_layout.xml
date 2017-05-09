@@ -7,12 +7,10 @@
     android:gravity="center"
     android:orientation="vertical">
 
-
-    <com.library.downloading.Down360Loading
+    <com.library.downloading.Down360LoadingView
         android:id="@+id/loading"
         android:layout_width="300dp"
         android:layout_height="50dp" />
-
 
     <Button
         android:id="@+id/cancel"

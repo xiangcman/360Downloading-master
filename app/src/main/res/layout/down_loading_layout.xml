@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#cccccc"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <com.library.downloading.Down360ViewGroup
+        android:id="@+id/down_loading_viewgroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:cancel_back_icon="@mipmap/close"
+        app:continue_back_icon="@mipmap/play"
+        app:stop_back_icon="@mipmap/stop" />
+
+</LinearLayout>
