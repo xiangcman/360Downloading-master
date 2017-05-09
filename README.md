@@ -23,92 +23,34 @@
 
 **代码使用:**
 ```java
-//设置取消的方法
-public void setCancel() {
-    if (status == Down360Loading.Status.Load) {
-        setStatus(Down360Loading.Status.Normal);
-    }
+供调用的方法有如下:
+
+取消下载:
+setCancel();
+
+设置进度:
+setProgress(int progress);
+
+设置状态(status:Down360Loading.Status.Normal直接可以取消的操作):
+setStatus(Status status);
+
+设置暂停或继续:
+setStop(stop:true表示暂停;stop:false表示继续);
+
+接口监听:
+public interface OnProgressStateChangeListener {
+    void onSuccess();
+
+    //暂停
+    void onStop();
+
+    //取消
+    void onCancel();
+
+    //继续
+    void onContinue();
 }
 
-/**
- * 进度改变的方法
- *
- * @param progress
- */
-public void setProgress(int progress) {
-    if (status != Status.Load) {
-        throw new RuntimeException("your status is not loading");
-    }
-
-    if (this.progress == progress) {
-        return;
-    }
-    this.progress = progress;
-    invalidate();
-    if (progress == 100) {
-        status = Status.Complete;
-        this.stop = false;
-        clearAnimation();
-        loadRotateAnimation.cancel();
-        movePointAnimation.cancel();
-        if (onProgressStateChangeListener != null) {
-            onProgressStateChangeListener.onSuccess();
-        }
-    }
-}
-
-/**
- * 设置状态的方法
- *
- * @param status(Down360Loading.Status.Normal:直接取消的操作)
- */
-public void setStatus(Status status) {
-    if (this.status == status) {
-        return;
-    }
-    this.status = status;
-    if (this.status == Status.Normal) {
-        progress = 0;
-        this.stop = false;
-        clearAnimation();
-        loadRotateAnimation.cancel();
-        movePointAnimation.cancel();
-        if (onProgressStateChangeListener != null) {
-            onProgressStateChangeListener.onCancel();
-        }
-    }
-    invalidate();
-}
-
-/**
- * 暂停或继续的方法
- *
- * @param stop(true:表示暂停，false:继续)
- */
-public void setStop(boolean stop) {
-    if (status != Down360Loading.Status.Load) {
-        return;
-    }
-    if (this.stop == stop) {
-        return;
-    }
-    this.stop = stop;
-    if (stop) {
-        loadRotateAnimation.cancel();
-        moveX = movePointAnimation.getAnimatedFraction();
-        movePointAnimation.cancel();
-        if (onProgressStateChangeListener != null) {
-            onProgressStateChangeListener.onStop();
-        }
-    } else {
-        loadRotateAnimation.start();
-        movePointAnimation.setCurrentFraction(moveX);
-        movePointAnimation.start();
-        if (onProgressStateChangeListener != null) {
-            onProgressStateChangeListener.onContinue();
-        }
-    }
-}
 ```
 
 **好了介绍就到这里了，如果觉得行的话，点个star吧，谢谢!!!**
