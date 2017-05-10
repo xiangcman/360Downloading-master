@@ -23,6 +23,7 @@
 | cancel_back_icon | reference      |   取消按钮用到的背景图|
 | stop_back_icon | reference      |   暂停按钮用到的背景图|
 | continue_back_icon | reference      |   继续按钮用到的背景图|
+
 **代码使用:**
 
 项目中直接使用的view:
@@ -88,6 +89,8 @@ dependencies {
 ```
 
 **好了介绍就到这里了，如果觉得行的话，点个star吧，谢谢!!!**
+
+**如果发现有什么问题，请联系我，我会第一时间给出反馈!!!**
 
 
 ### 关于我:
