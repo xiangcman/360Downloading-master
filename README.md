@@ -20,8 +20,26 @@
 | expand_speed | integer      |   收缩后背景展开的时间|
 | right_loading_speed | integer      |   loading状态下右边的loading每一次转动时增加的角度|
 | left_loading_speed | integer      |   左边运动的几个点走一次需要的时间|
-
+| cancel_back_icon | reference      |   取消按钮用到的背景图|
+| stop_back_icon | reference      |   暂停按钮用到的背景图|
+| continue_back_icon | reference      |   继续按钮用到的背景图|
 **代码使用:**
+
+项目中直接使用的view:
+```xml
+<com.library.downloading.Down360ViewGroup
+        android:id="@+id/down_loading_viewgroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:cancel_back_icon="@mipmap/close"
+        app:continue_back_icon="@mipmap/play"
+        app:stop_back_icon="@mipmap/stop" />
+```
+效果图如下:
+
+![final_simple_gif.gif](https://github.com/1002326270xc/360Downloading-master/blob/master/photos/final_simple_gif.gif)
+
 ```java
 供调用的方法有如下:
 
