@@ -58,30 +58,33 @@ public class Down360LoadingView extends View {
 
     private int progress;
     //状态以及显示百分比的字体大小
-    private int statusSize;
+    private int statusSize = sp2px(15);
     //状态的颜色
-    private int statusColor;
+    private int statusColor = Color.WHITE;
     //整个背景的颜色
-    private int bgColor;
+    private int bgColor = Color.parseColor("#00CC99");
     //进度的颜色
-    private int progressColor;
+    private int progressColor = Color.parseColor("#4400CC99");
     //背景收缩的时间
-    private int collectSpeed;
+    private int collectSpeed = 800;
     //背景收缩后中间的load转一圈需要的时间
-    private int collectRotateSpeed;
+    private int collectRotateSpeed = 1500;
     //收缩后背景展开的时间
-    private int expandSpeed;
+    private int expandSpeed = 1000;
     //loading状态下右边的loading每一次转动时增加的角度
-    private int rightLoadingSpeed;
+    private int rightLoadingSpeed = 7;
     //左边运动的几个点走一次需要的时间
-    private int leftLoadingSpeed;
+    private int leftLoadingSpeed = 2000;
 
     public Down360LoadingView(Context context) {
-        super(context);
+        this(context, null);
+        init();
     }
 
     public Down360LoadingView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
+        initAnimation();
     }
 
     public static class ArguParams {
@@ -107,22 +110,24 @@ public class Down360LoadingView extends View {
         rightLoadingSpeed = arguParams.rightLoadingSpeed;
         leftLoadingSpeed = arguParams.leftLoadingSpeed;
         init();
+        initAnimation();
     }
 
     private void init() {
-        bgPaint = new Paint();
-        bgPaint.setAntiAlias(true);
+        if (bgPaint == null) {
+            bgPaint = new Paint();
+            bgPaint.setAntiAlias(true);
+            bgPaint.setStyle(Paint.Style.FILL);
+        }
         bgPaint.setColor(bgColor);
-        bgPaint.setStyle(Paint.Style.FILL);
-
-        textPaint = new Paint();
-        textPaint.setAntiAlias(true);
+        if (textPaint == null) {
+            textPaint = new Paint();
+            textPaint.setAntiAlias(true);
+            textPaint.setStyle(Paint.Style.FILL);
+            textPaint.setTextAlign(Paint.Align.CENTER);
+        }
         textPaint.setColor(statusColor);
-        textPaint.setStyle(Paint.Style.FILL);
         textPaint.setTextSize(statusSize);
-        textPaint.setTextAlign(Paint.Align.CENTER);
-
-        initAnimation();
     }
 
     private void initAnimation() {
@@ -539,6 +544,10 @@ public class Down360LoadingView extends View {
 
     private int dp2px(float value) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, getResources().getDisplayMetrics());
+    }
+
+    private int sp2px(int value) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, value, getResources().getDisplayMetrics());
     }
 
     @Override
