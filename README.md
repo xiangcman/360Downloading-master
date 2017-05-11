@@ -83,7 +83,7 @@ allprojects {
 
 dependencies {
         ...
-        compile 'com.github.1002326270xc:360Downloading-master:v1.1'
+        compile 'com.github.1002326270xc:360Downloading-master:v1.2'
         ...
 }
 ```
