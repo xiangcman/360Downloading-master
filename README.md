@@ -13,6 +13,7 @@
 | :------------- |:-------------| :-----|
 | status_text_size      | dimension | 状态以及显示百分比的字体大小|
 | status_text_color      | color | 状态的颜色 |
+| load_point_color      | color | load状态下移动的点的颜色 |
 | bg_color      | color      |   整个背景的颜色 |
 | progress_color | color      |    进度的颜色 |
 | collect_speed | integer      |    背景收缩的时间 |
@@ -33,8 +34,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        app:bg_color="#33CCFF"
         app:cancel_back_icon="@mipmap/close"
         app:continue_back_icon="@mipmap/play"
+        app:left_loading_speed="2500"
+        app:right_loading_speed="8"
+        app:status_text_color="#cccccc"
         app:stop_back_icon="@mipmap/stop" />
 ```
 效果图如下:
