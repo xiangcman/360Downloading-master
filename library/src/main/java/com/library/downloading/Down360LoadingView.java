@@ -78,39 +78,35 @@ public class Down360LoadingView extends View {
 
     public Down360LoadingView(Context context) {
         super(context);
-        init();
     }
 
     public Down360LoadingView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initArgus(context, attrs);
-        init();
     }
 
-    private void initArgus(Context context, AttributeSet attrs) {
-        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.Down360LoadingView);
-        try {
-            statusSize = sp2px(15);
-            statusSize = (int) array.getDimension(R.styleable.Down360LoadingView_status_text_size, statusSize);
-            statusColor = Color.WHITE;
-            statusColor = array.getColor(R.styleable.Down360LoadingView_status_text_color, statusColor);
-            bgColor = Color.parseColor("#00CC99");
-            bgColor = array.getColor(R.styleable.Down360LoadingView_bg_color, bgColor);
-            progressColor = Color.parseColor("#4400CC99");
-            progressColor = array.getColor(R.styleable.Down360LoadingView_progress_color, progressColor);
-            collectSpeed = 800;
-            collectSpeed = array.getInt(R.styleable.Down360LoadingView_collect_speed, collectSpeed);
-            collectRotateSpeed = 1500;
-            collectRotateSpeed = array.getInt(R.styleable.Down360LoadingView_collect_rotate_speed, collectRotateSpeed);
-            expandSpeed = 1000;
-            expandSpeed = array.getInt(R.styleable.Down360LoadingView_expand_speed, expandSpeed);
-            rightLoadingSpeed = 7;
-            rightLoadingSpeed = array.getInt(R.styleable.Down360LoadingView_right_loading_speed, rightLoadingSpeed);
-            leftLoadingSpeed = 2000;
-            leftLoadingSpeed = array.getInt(R.styleable.Down360LoadingView_left_loading_speed, leftLoadingSpeed);
-        } finally {
-            array.recycle();
-        }
+    public static class ArguParams {
+        int statusSize;
+        int statusColor;
+        int bgColor;
+        int progressColor;
+        int collectSpeed;
+        int collectRotateSpeed;
+        int expandSpeed;
+        int rightLoadingSpeed;
+        int leftLoadingSpeed;
+    }
+
+    public void setArgus(ArguParams arguParams) {
+        statusSize = arguParams.statusSize;
+        statusColor = arguParams.statusColor;
+        bgColor = arguParams.bgColor;
+        progressColor = arguParams.progressColor;
+        collectSpeed = arguParams.collectSpeed;
+        collectRotateSpeed = arguParams.collectRotateSpeed;
+        expandSpeed = arguParams.expandSpeed;
+        rightLoadingSpeed = arguParams.rightLoadingSpeed;
+        leftLoadingSpeed = arguParams.leftLoadingSpeed;
+        init();
     }
 
     private void init() {
@@ -543,10 +539,6 @@ public class Down360LoadingView extends View {
 
     private int dp2px(float value) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, getResources().getDisplayMetrics());
-    }
-
-    private int sp2px(int value) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, value, getResources().getDisplayMetrics());
     }
 
     @Override
