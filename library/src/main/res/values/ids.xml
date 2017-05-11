@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="stop_img" type="id" />
+    <item name="cancel_img" type="id" />
+    <item name="down_load" type="id" />
+</resources>

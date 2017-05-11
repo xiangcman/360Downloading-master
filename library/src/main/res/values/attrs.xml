@@ -3,6 +3,7 @@
     <declare-styleable name="Down360LoadingView">
         <attr name="status_text_size" format="dimension" />
         <attr name="status_text_color" format="color" />
+        <attr name="load_point_color" format="color" />
         <attr name="bg_color" format="color" />
         <attr name="progress_color" format="color" />
         <attr name="collect_speed" format="integer" />

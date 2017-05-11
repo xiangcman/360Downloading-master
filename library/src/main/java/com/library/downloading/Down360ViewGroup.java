@@ -25,6 +25,8 @@ public class Down360ViewGroup extends RelativeLayout {
     private int statusSize;
     //状态的颜色
     private int statusColor;
+
+    private int loadPointColor;
     //整个背景的颜色
     private int bgColor;
     //进度的颜色
@@ -56,6 +58,7 @@ public class Down360ViewGroup extends RelativeLayout {
         Down360LoadingView.ArguParams arguParams = new Down360LoadingView.ArguParams();
         arguParams.statusSize = statusSize;
         arguParams.statusColor = statusColor;
+        arguParams.loadPointColor = loadPointColor;
         arguParams.bgColor = bgColor;
         arguParams.progressColor = progressColor;
         arguParams.collectSpeed = collectSpeed;
@@ -99,10 +102,15 @@ public class Down360ViewGroup extends RelativeLayout {
             cancelBack = array.getDrawable(R.styleable.Down360LoadingView_cancel_back_icon);
             continueBack = array.getDrawable(R.styleable.Down360LoadingView_continue_back_icon);
             stopBack = array.getDrawable(R.styleable.Down360LoadingView_stop_back_icon);
+            if (cancelBack == null || continueBack == null || stopBack == null) {
+                throw new IllegalArgumentException("your cancel_back_icon is null or stop_back_icon is null or continue_back_icon");
+            }
             statusSize = sp2px(15);
             statusSize = (int) array.getDimension(R.styleable.Down360LoadingView_status_text_size, statusSize);
             statusColor = Color.WHITE;
             statusColor = array.getColor(R.styleable.Down360LoadingView_status_text_color, statusColor);
+            loadPointColor = Color.WHITE;
+            loadPointColor = array.getColor(R.styleable.Down360LoadingView_load_point_color, loadPointColor);
             bgColor = Color.parseColor("#00CC99");
             bgColor = array.getColor(R.styleable.Down360LoadingView_bg_color, bgColor);
             progressColor = Color.parseColor("#4400CC99");
@@ -134,6 +142,10 @@ public class Down360ViewGroup extends RelativeLayout {
                 cancelImg.setVisibility(View.VISIBLE);
             }
         }
+    }
+
+    public void setOnProgressStateChangeListener(Down360LoadingView.OnProgressStateChangeListener onProgressStateChangeListener) {
+        down360LoadingView.setOnProgressStateChangeListener(onProgressStateChangeListener);
     }
 
     public Down360LoadingView.Status getStatus() {

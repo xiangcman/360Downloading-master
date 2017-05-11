@@ -12,8 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        app:bg_color="#33CCFF"
         app:cancel_back_icon="@mipmap/close"
         app:continue_back_icon="@mipmap/play"
+        app:left_loading_speed="2500"
+        app:right_loading_speed="8"
+        app:status_text_color="#cccccc"
         app:stop_back_icon="@mipmap/stop" />
 
 </LinearLayout>

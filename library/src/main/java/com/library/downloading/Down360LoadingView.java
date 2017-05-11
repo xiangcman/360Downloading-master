@@ -61,6 +61,8 @@ public class Down360LoadingView extends View {
     private int statusSize = sp2px(15);
     //状态的颜色
     private int statusColor = Color.WHITE;
+
+    private int loadPointColor = Color.WHITE;
     //整个背景的颜色
     private int bgColor = Color.parseColor("#00CC99");
     //进度的颜色
@@ -90,6 +92,7 @@ public class Down360LoadingView extends View {
     public static class ArguParams {
         int statusSize;
         int statusColor;
+        int loadPointColor;
         int bgColor;
         int progressColor;
         int collectSpeed;
@@ -102,6 +105,7 @@ public class Down360LoadingView extends View {
     public void setArgus(ArguParams arguParams) {
         statusSize = arguParams.statusSize;
         statusColor = arguParams.statusColor;
+        loadPointColor = arguParams.loadPointColor;
         bgColor = arguParams.bgColor;
         progressColor = arguParams.progressColor;
         collectSpeed = arguParams.collectSpeed;
@@ -110,7 +114,6 @@ public class Down360LoadingView extends View {
         rightLoadingSpeed = arguParams.rightLoadingSpeed;
         leftLoadingSpeed = arguParams.leftLoadingSpeed;
         init();
-        initAnimation();
     }
 
     private void init() {
@@ -249,6 +252,7 @@ public class Down360LoadingView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (status == Status.Normal || status == Status.Start) {
+            textPaint.setColor(statusColor);
             float start = (float) (width * 1.0 / 2 - currentLength * 1.0 / 2);
             canvas.drawRoundRect(start, 0, (float) (width * 1.0 / 2 + currentLength * 1.0 / 2), height, 90, 90, bgPaint);
             Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
@@ -257,6 +261,7 @@ public class Down360LoadingView extends View {
                 canvas.drawText("下载", (float) (width * 1.0 / 2), (float) (height * 1.0 / 2 - allHeight / 2 - fontMetrics.ascent), textPaint);
             }
         } else if (status == Status.Pre) {
+            textPaint.setColor(loadPointColor);
             canvas.drawCircle((float) (width * 1.0 / 2), (float) (height * 1.0 / 2), (float) (height * 1.0 / 2), bgPaint);
             canvas.save();
             canvas.rotate(angle, (float) (width * 1.0 / 2), (float) (height * 1.0 / 2));
@@ -280,6 +285,7 @@ public class Down360LoadingView extends View {
 
             float start = (float) (width * 1.0 / 2 - currentLength * 1.0 / 2);
             bgPaint.setColor(progressColor);
+            textPaint.setColor(loadPointColor);
             canvas.drawRoundRect(start, 0, (float) (width * 1.0 / 2 + currentLength * 1.0 / 2), height, 90, 90, bgPaint);
             if (progress != 100) {
                 //画中间的几个loading的点的情况哈
@@ -311,6 +317,7 @@ public class Down360LoadingView extends View {
                 canvas.restore();
             }
             //中间的进度文字
+            textPaint.setColor(statusColor);
             Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
             float allHeight = fontMetrics.descent - fontMetrics.ascent;
             canvas.drawText(progress + "%", (float) (width * 1.0 / 2), (float) (height * 1.0 / 2 - allHeight / 2 - fontMetrics.ascent), textPaint);

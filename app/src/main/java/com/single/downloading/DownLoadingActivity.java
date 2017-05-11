@@ -45,6 +45,7 @@ public class DownLoadingActivity extends AppCompatActivity implements Down360Loa
                 });
             }
         }, 0, 500);
+        loading.setOnProgressStateChangeListener(this);
     }
 
     @Override
