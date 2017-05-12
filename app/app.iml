@@ -139,5 +139,6 @@
     <orderEntry type="library" exported="" scope="TEST" name="jsr305-2.0.1" level="project" />
     <orderEntry type="library" exported="" name="support-core-utils-25.0.1" level="project" />
     <orderEntry type="module" module-name="library" exported="" />
+    <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
   </component>
 </module>

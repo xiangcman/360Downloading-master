@@ -1,14 +1,10 @@
 package com.library.downloading;
 
-import android.animation.Animator;
-import android.animation.ValueAnimator;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
+import android.graphics.RectF;
 import android.support.v4.view.MotionEventCompat;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -18,6 +14,9 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.Transformation;
+
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.ValueAnimator;
 
 /**
  * Created by xiangcheng on 17/2/22.
@@ -78,6 +77,9 @@ public class Down360LoadingView extends View {
     //左边运动的几个点走一次需要的时间
     private int leftLoadingSpeed = 2000;
 
+    //add 17/5/12 为了解决drawRoundRect在低版本上兼容的问题
+    private RectF backRectF;//背景收缩和展开的矩形
+
     public Down360LoadingView(Context context) {
         this(context, null);
         init();
@@ -87,6 +89,7 @@ public class Down360LoadingView extends View {
         super(context, attrs);
         init();
         initAnimation();
+        backRectF = new RectF();
     }
 
     public static class ArguParams {
@@ -247,14 +250,13 @@ public class Down360LoadingView extends View {
         Normal, Start, Pre, Expand, Load, Complete;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (status == Status.Normal || status == Status.Start) {
             textPaint.setColor(statusColor);
             float start = (float) (width * 1.0 / 2 - currentLength * 1.0 / 2);
-            canvas.drawRoundRect(start, 0, (float) (width * 1.0 / 2 + currentLength * 1.0 / 2), height, 90, 90, bgPaint);
+            drawRoundBack(canvas, start);
             Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
             float allHeight = fontMetrics.descent - fontMetrics.ascent;
             if (status == Status.Normal) {
@@ -265,28 +267,22 @@ public class Down360LoadingView extends View {
             canvas.drawCircle((float) (width * 1.0 / 2), (float) (height * 1.0 / 2), (float) (height * 1.0 / 2), bgPaint);
             canvas.save();
             canvas.rotate(angle, (float) (width * 1.0 / 2), (float) (height * 1.0 / 2));
-            canvas.drawCircle((float) (width * 1.0 / 2), (float) (height * 1.0 / 2), 25, textPaint);
-            canvas.drawCircle((float) (width * 1.0 / 2), (float) (height * 1.0 / 2) - 24, 15, textPaint);
-            canvas.drawCircle((float) (width * 1.0 / 2 - 22), (float) ((height * 1.0 / 2) + 18 * 0.866), 15, textPaint);
-            canvas.drawCircle((float) (width * 1.0 / 2 + 22), (float) ((height * 1.0 / 2) + 18 * 0.866), 15, textPaint);
+            drawPreExpandCircles(canvas);
             canvas.restore();
         } else if (status == Status.Expand) {
             float start = (float) (width * 1.0 / 2 - currentLength * 1.0 / 2);
-            canvas.drawRoundRect(start, 0, (float) (width * 1.0 / 2 + currentLength * 1.0 / 2), height, 90, 90, bgPaint);
+            drawRoundBack(canvas, start);
 
             canvas.save();
             canvas.translate(translateX, 0);
-            canvas.drawCircle((float) (width * 1.0 / 2), (float) (height * 1.0 / 2), 25, textPaint);
-            canvas.drawCircle((float) (width * 1.0 / 2), (float) (height * 1.0 / 2) - 24, 15, textPaint);
-            canvas.drawCircle((float) (width * 1.0 / 2 - 22), (float) ((height * 1.0 / 2) + 18 * 0.866), 15, textPaint);
-            canvas.drawCircle((float) (width * 1.0 / 2 + 22), (float) ((height * 1.0 / 2) + 18 * 0.866), 15, textPaint);
+            drawPreExpandCircles(canvas);
             canvas.restore();
         } else if (status == Status.Load || status == Status.Complete) {
 
             float start = (float) (width * 1.0 / 2 - currentLength * 1.0 / 2);
             bgPaint.setColor(progressColor);
             textPaint.setColor(loadPointColor);
-            canvas.drawRoundRect(start, 0, (float) (width * 1.0 / 2 + currentLength * 1.0 / 2), height, 90, 90, bgPaint);
+            drawRoundBack(canvas, start);
             if (progress != 100) {
                 //画中间的几个loading的点的情况哈
                 for (int i = 0; i < fourMovePoint.length; i++) {
@@ -301,7 +297,7 @@ public class Down360LoadingView extends View {
 
             canvas.save();
             canvas.clipRect(0, 0, progressRight, height);
-            canvas.drawRoundRect(start, 0, (float) (width * 1.0 / 2 + currentLength * 1.0 / 2), height, 90, 90, bgPaint);
+            drawRoundBack(canvas, start);
             canvas.restore();
 
             if (progress != 100) {
@@ -310,10 +306,10 @@ public class Down360LoadingView extends View {
                 canvas.save();
                 //// TODO: 17/2/22
                 canvas.rotate(loadAngle, (float) (width - height * 1.0 / 2), (float) (height * 1.0 / 2));
-                canvas.drawCircle(width - height + 30, getCircleY(width - height + 30), 5, textPaint);
-                canvas.drawCircle(width - height + 45, getCircleY(width - height + 45), 8, textPaint);
-                canvas.drawCircle(width - height + 68, getCircleY(width - height + 68), 11, textPaint);
-                canvas.drawCircle(width - height + 98, getCircleY(width - height + 98), 14, textPaint);
+                canvas.drawCircle((float) (width - height + height * 0.21), getCircleY((float) (width - height + height * 0.21)), dp2px(2), textPaint);
+                canvas.drawCircle((float) (width - height + height * 0.38), getCircleY((float) (width - height + height * 0.38)), dp2px(3), textPaint);
+                canvas.drawCircle((float) (width - height + height * 0.59), getCircleY((float) (width - height + height * 0.59)), dp2px(4), textPaint);
+                canvas.drawCircle((float) (width - height + height * 0.81), getCircleY((float) (width - height + height * 0.81)), dp2px(5), textPaint);
                 canvas.restore();
             }
             //中间的进度文字
@@ -322,6 +318,27 @@ public class Down360LoadingView extends View {
             float allHeight = fontMetrics.descent - fontMetrics.ascent;
             canvas.drawText(progress + "%", (float) (width * 1.0 / 2), (float) (height * 1.0 / 2 - allHeight / 2 - fontMetrics.ascent), textPaint);
         }
+    }
+
+    private void drawPreExpandCircles(Canvas canvas) {
+        canvas.drawCircle((float) (width * 1.0 / 2), (float) (height * 1.0 / 2), dp2px(12), textPaint);
+        canvas.drawCircle((float) (width * 1.0 / 2), (float) ((height * 1.0 / 2) - dp2px(10)), dp2px(8), textPaint);
+        canvas.drawCircle((float) (width * 1.0 / 2 - dp2px(10)), (float) ((height * 1.0 / 2) + dp2px(6)), dp2px(8), textPaint);
+        canvas.drawCircle((float) (width * 1.0 / 2 + dp2px(10)), (float) ((height * 1.0 / 2) + dp2px(6)), dp2px(8), textPaint);
+    }
+
+    /**
+     * 绘制带有圆角的背景
+     *
+     * @param canvas
+     * @param start
+     */
+    private void drawRoundBack(Canvas canvas, float start) {
+        backRectF.left = start;
+        backRectF.top = 0;
+        backRectF.right = (float) (width * 1.0 / 2 + currentLength * 1.0 / 2);
+        backRectF.bottom = height;
+        canvas.drawRoundRect(backRectF, (float) (height * 1.0 / 2), (float) (height * 1.0 / 2), bgPaint);
     }
 
     /**
@@ -453,7 +470,7 @@ public class Down360LoadingView extends View {
             }
         } else {
             loadRotateAnimation.start();
-            movePointAnimation.setCurrentFraction(moveX);
+            movePointAnimation.setCurrentPlayTime((long) (moveX * leftLoadingSpeed));
             movePointAnimation.start();
             if (onProgressStateChangeListener != null) {
                 onProgressStateChangeListener.onContinue();
