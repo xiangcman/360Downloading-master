@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/1002326270xc/360Downloading-master.svg)](https://jitpack.io/#1002326270xc/360Downloading-master)
+
 最近在学习android的高级view的绘制，再结合值动画的数据上的改变，自己撸了个360手机助手的下载按钮。先看下原版的360手机助手的下载按钮是长啥样子吧:
 
 ![360下载按钮效果图.gif](https://github.com/1002326270xc/360Downloading-master/blob/master/photos/360下载按钮效果图.gif)
