@@ -470,8 +470,8 @@ public class Down360LoadingView extends View {
             }
         } else {
             loadRotateAnimation.start();
-            movePointAnimation.setCurrentPlayTime((long) (moveX * leftLoadingSpeed));
             movePointAnimation.start();
+            movePointAnimation.setCurrentPlayTime((long) (moveX * leftLoadingSpeed));
             if (onProgressStateChangeListener != null) {
                 onProgressStateChangeListener.onContinue();
             }
